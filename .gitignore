@@ -4,3 +4,7 @@
 
 # VSCode
 .vscode
+
+# Miscelleneous
+postgres
+.env
