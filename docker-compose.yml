@@ -20,6 +20,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: ${POSTGRES_DB:-postgres}
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '1g'
     env_file:
       - default.env
 
