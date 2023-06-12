@@ -13,11 +13,11 @@ Simple template of PostgreSQL with Docker Compose
 ## Default Value
 Create `.env` file to define your own value
 
-| Variable name     | Default value  | Datatype |          Description |     |
-|:------------------|:---------------|:--------:|---------------------:|-----|
-| POSTGRES_USER     | postgres       |  String  |     Initial username |     |
-| POSTGRES_PASSWORD | password       |  String  |     Initial password |     |
-| TIMEZONE          | "Asia/Bangkok" |  String  | Database Locale Time |     |
+| Variable name     | Default value  | Datatype |          Description |
+|:------------------|:---------------|:--------:|---------------------:|
+| POSTGRES_USER     | postgres       |  String  |     Initial username |
+| POSTGRES_PASSWORD | password       |  String  |     Initial password |
+| TIMEZONE          | "Asia/Bangkok" |  String  | Database Locale Time |
 
 ## Reference
 * [PostgreSQL](https://hub.docker.com/_/postgres)
