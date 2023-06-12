@@ -1,15 +1,43 @@
-version: '3.7'
+version: '3.8'
 
 services:
   postgres:
     image: postgres:${POSTGRES_VERSION:-12.5}
-    container_name: postgresql
-    restart: unless-stopped
+    container_name: postgres
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: ${POSTGRES_DB:-postgres}
-    ports:
-      - ${POSTGRES_PORT:-5432}:5432
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '${POSTGRES_CPU_LIMIT:-1}'
+          memory: '${POSTGRES_MEMORY_LIMIT:-512M}'
+    env_file:
+      - default.env
+
+volumes:
+  postgres:
+    name: postgres
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./postgres
+
+networks:
+  postgres:
+    name: postgres
+    driver: bridge
